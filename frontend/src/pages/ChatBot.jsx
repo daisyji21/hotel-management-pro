@@ -12,7 +12,7 @@ export default function ChatBot() {
     const userMsg = { sender: "user", text: msg };
     setChat((prev) => [...prev, userMsg]);
 
-    const res = await axios.post("http://localhost:5000/api/ai", {
+    const res = await axios.post("https://hotel-management-pro-backend.onrender.com/api/ai", {
       message: msg,
     });
 
