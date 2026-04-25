@@ -2,32 +2,35 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Register() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const submit = async () => {
     try {
-      const res = await axios.post(
-        "https://hotel-management-pro-backend.onrender.com/api/auth/login",
-        { email, password }
+      await axios.post(
+        "https://hotel-management-pro-backend.onrender.com/api/auth/register",
+        { name, email, password }
       );
 
-      // Save token
-      localStorage.setItem("token", res.data.token);
+      alert("Registered Successfully ✅");
 
-      alert("Login Successful ✅");
-
-      navigate("/"); // redirect home
+      navigate("/login");
     } catch (err) {
-      alert("Login Failed ❌");
+      alert("Registration Failed ❌");
     }
   };
 
   return (
     <div style={styles.container}>
-      <h2>Login</h2>
+      <h2>Register</h2>
+
+      <input
+        placeholder="Name"
+        onChange={(e) => setName(e.target.value)}
+      />
 
       <input
         placeholder="Email"
@@ -40,7 +43,7 @@ export default function Login() {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <button onClick={submit}>Login</button>
+      <button onClick={submit}>Register</button>
     </div>
   );
 }
