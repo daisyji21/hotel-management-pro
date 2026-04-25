@@ -139,7 +139,7 @@ export default function Home() {
       name: "Budget Room",
       city: "Jaipur",
       price: 1999,
-      image: "https://images.unsplash.com/photo-1501117716987-c8e1ecb210a8",
+      image: "https://images.travelandleisureasia.com/wp-content/uploads/sites/3/2023/02/20105018/the-oberoi-2-1600x900.jpeg",
     },
   ];
 
