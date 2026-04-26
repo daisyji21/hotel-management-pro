@@ -135,12 +135,75 @@ export default function Home() {
       image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa",
     },
     {
-      id: 3,
+  id: 3,
+  name: "Hyatt Regency",
+  city: "Lucknow",
+  price: 7500,
+  image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa"
+},
+{
+  id: 4,
+  name: "Taj Mahal Hotel",
+  city: "Lucknow",
+  price: 12000,
+  image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb"
+},
+{
+  id: 5,
+  name: "Renaissance Hotel",
+  city: "Lucknow",
+  price: 6800,
+  image: "https://images.unsplash.com/photo-1566073771259-6a8506099945"
+},
+{
+  id: 6,
+  name: "Novotel Gomti Nagar",
+  city: "Lucknow",
+  price: 5200,
+  image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b"
+},
+{
+  id: 7,
+  name: "Golden Tulip",
+  city: "Lucknow",
+  price: 4500,
+  image: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461"
+},
+{
+  id: 8,
+  name: "Holiday Inn Airport",
+  city: "Lucknow",
+  price: 6000,
+  image: "https://images.unsplash.com/photo-1590490360182-c33d57733427"
+},
+{
+  id: 9,
+  name: "Saraca Heritage Hotel",
+  city: "Lucknow",
+  price: 8000,
+  image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"
+},
+    {
+      id: 10,
       name: "Budget Room",
       city: "Jaipur",
       price: 1999,
       image: "https://images.travelandleisureasia.com/wp-content/uploads/sites/3/2023/02/20105018/the-oberoi-2-1600x900.jpeg",
     },
+    {
+  id: 11,
+  name: "Clarks Avadh",
+  city: "Lucknow",
+  price: 5500,
+  image: "https://images.unsplash.com/photo-1595576508898-0ad5c879a061"
+},
+{
+  id: 12,
+  name: "Radisson Lucknow City Center",
+  city: "Lucknow",
+  price: 7000,
+  image: "https://images.unsplash.com/photo-1584132967334-10e028bd69f7"
+}
   ];
 
   return (
