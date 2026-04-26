@@ -1,3 +1,4 @@
+// 
 import { useState } from "react";
 import axios from "axios";
 
@@ -7,32 +8,51 @@ export default function ChatBot() {
   const [open, setOpen] = useState(false);
 
   const sendMessage = async () => {
-    if (!msg) return;
+    if (!msg.trim()) return;
 
     const userMsg = { sender: "user", text: msg };
     setChat((prev) => [...prev, userMsg]);
 
-    const res = await axios.post("https://hotel-management-pro-backend.onrender.com/api/ai", {
-      message: msg,
-    });
+    try {
+      const res = await axios.post(
+        "https://hotel-management-pro-backend.onrender.com/api/ai",
+        { message: msg }
+      );
 
-    const botMsg = { sender: "bot", text: res.data.reply };
-    setChat((prev) => [...prev, botMsg]);
+      const botMsg = { sender: "bot", text: res.data.reply };
+      setChat((prev) => [...prev, botMsg]);
+    } catch (err) {
+      const botMsg = { sender: "bot", text: "Server error ❌" };
+      setChat((prev) => [...prev, botMsg]);
+    }
 
     setMsg("");
   };
 
   return (
     <>
-      {/* 💬 Toggle Button */}
-      <button style={styles.toggleBtn} onClick={() => setOpen(!open)}>
-        💬Query
+      {/* 🔵 Floating Button */}
+      <button
+        style={styles.toggleBtn}
+        onClick={() => setOpen(!open)}
+        onMouseOver={(e) => (e.target.style.background = "#004a99")}
+        onMouseOut={(e) => (e.target.style.background = "#0071c2")}
+      >
+        💬
       </button>
 
+      {/* 💬 Chat Window */}
       {open && (
         <div style={styles.container}>
-          <div style={styles.header}>AI Assistant 🤖</div>
+          {/* Header */}
+          <div style={styles.header}>
+            <span>Hotel Assistant 🤖</span>
+            <button style={styles.closeBtn} onClick={() => setOpen(false)}>
+              ✖
+            </button>
+          </div>
 
+          {/* Chat Messages */}
           <div style={styles.chatBox}>
             {chat.map((c, i) => (
               <div
@@ -57,14 +77,21 @@ export default function ChatBot() {
             ))}
           </div>
 
+          {/* Input */}
           <div style={styles.inputBox}>
             <input
               value={msg}
               onChange={(e) => setMsg(e.target.value)}
               placeholder="Ask about hotels..."
               style={styles.input}
+              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             />
-            <button onClick={sendMessage} style={styles.sendBtn}>
+            <button
+              onClick={sendMessage}
+              style={styles.sendBtn}
+              onMouseOver={(e) => (e.target.style.background = "#004a99")}
+              onMouseOut={(e) => (e.target.style.background = "#0071c2")}
+            >
               ➤
             </button>
           </div>
@@ -79,60 +106,82 @@ const styles = {
     position: "fixed",
     bottom: "20px",
     right: "20px",
-    background: "#216435",
+    background: "#3c6236",
     color: "white",
     border: "none",
-    borderRadius: "30%",
-    width: "100px",
-    height: "100px",
-    fontSize: "20px",
-    hover: { background: "#223528" },
-    cursor: "pointer"
-    ,
+    borderRadius: "50%",
+    width: "60px",
+    height: "60px",
+    fontSize: "24px",
+    cursor: "pointer",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
+    transition: "0.3s",
   },
+
   container: {
     position: "fixed",
-    bottom: "80px",
+    bottom: "90px",
     right: "20px",
     width: "320px",
     background: "white",
-    borderRadius: "10px",
-    boxShadow: "0 0 15px rgba(0,0,0,0.2)",
+    borderRadius: "12px",
+    boxShadow: "0 5px 20px rgba(0,0,0,0.3)",
     overflow: "hidden",
+    animation: "fadeIn 0.3s ease",
   },
+
   header: {
     background: "#0071c2",
     color: "white",
     padding: "10px",
     fontWeight: "bold",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
+
+  closeBtn: {
+    background: "transparent",
+    border: "none",
+    color: "white",
+    fontSize: "18px",
+    cursor: "pointer",
+  },
+
   chatBox: {
-    height: "250px",
+    height: "280px",
     overflowY: "auto",
     padding: "10px",
-    background: "#f5f5f5",
+    background: "#f4f6f8",
   },
+
   msg: {
     padding: "8px 12px",
     borderRadius: "15px",
     margin: "5px",
     maxWidth: "70%",
+    fontSize: "14px",
   },
+
   inputBox: {
     display: "flex",
     borderTop: "1px solid #ddd",
   },
+
   input: {
     flex: 1,
     padding: "10px",
     border: "none",
     outline: "none",
+    fontSize: "14px",
   },
+
   sendBtn: {
     background: "#0071c2",
     color: "white",
     border: "none",
     padding: "10px 15px",
     cursor: "pointer",
+    transition: "0.3s",
   },
 };
